@@ -1,0 +1,37 @@
+# MLX-LoRA fine-tune config for Qwen 2.5 7B QLoRA 4-bit
+# Designed for Mac mini M4 16GB unified memory
+
+# Model
+model: "mlx-community/Qwen2.5-7B-Instruct-4bit"
+# Alternative bases:
+#   mlx-community/Qwen2.5-7B-4bit         (base, no instruct)
+#   mlx-community/Qwen2.5-3B-Instruct-4bit (safer fallback)
+#   mlx-community/Qwen2.5-1.5B-Instruct-4bit (small)
+
+# Training
+train: true
+data: "prep/data"
+test: true                 # run test eval after training
+seed: 42
+batch_size: 1              # 16GB unified mem 之 batch=1 安全
+iters: 3000                # ~ 3000 step covers ~ 3M tokens at b=1
+val_batches: 25
+learning_rate: 1.0e-5
+steps_per_report: 50
+steps_per_eval: 200
+save_every: 500
+
+# LoRA params
+fine_tune_type: "lora"
+num_layers: 16             # 仅训最后 16 transformer layer
+lora_parameters:
+  rank: 16
+  scale: 20.0
+  dropout: 0.0
+# Total trainable params: ~ 10M (Qwen 7B 之 ~0.15%)
+
+# Output
+adapter_path: "adapters/ming-vintage-qwen7b-lora"
+
+# Resume / save
+resume_adapter_file: null  # set to path to resume

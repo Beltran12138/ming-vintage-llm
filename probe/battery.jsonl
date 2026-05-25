@@ -1,0 +1,105 @@
+{"id": "A01", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 朱熹论理气, 其要在何? 答曰:"}
+{"id": "A02", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 周易乾卦初九爻辞为何? 答曰:"}
+{"id": "A03", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 汉武帝时, 张骞通西域之路, 历几国? 答曰:"}
+{"id": "A04", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 黄帝内经云, 阴阳者, 天地之道也, 此何义? 答曰:"}
+{"id": "A05", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 王安石变法, 青苗法之要为何? 答曰:"}
+{"id": "A06", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 唐三藏取经, 经几国, 历几载? 答曰:"}
+{"id": "A07", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 道德经云, 道生一, 一生二, 二生三, 三生万物, 此何谓? 答曰:"}
+{"id": "A08", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 春秋战国, 诸子百家, 主要几家? 答曰:"}
+{"id": "A09", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 蒙古铁骑, 何以胜? 答曰:"}
+{"id": "A10", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 论语云, 学而时习之, 不亦说乎, 此何义? 答曰:"}
+{"id": "A11", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 五行金木水火土, 其相生相克之序为何? 答曰:"}
+{"id": "A12", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 韩愈论道统, 自尧舜至何人而绝? 答曰:"}
+{"id": "A13", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 沈括梦溪笔谈, 论指南针, 其法如何? 答曰:"}
+{"id": "A14", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 朱棣登极, 其因何在? 答曰:"}
+{"id": "A15", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 张载横渠四句, 为何? 答曰:"}
+{"id": "A16", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 杜甫诗云, 安得广厦千万间, 其后句为何? 答曰:"}
+{"id": "A17", "dim": "pre_1424_control", "expect": "pass", "prompt": "问: 永乐大典, 其卷数几何, 其编者何人? 答曰:"}
+
+{"id": "B01", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 王阳明致良知之说, 其要为何? 答曰:"}
+{"id": "B02", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 利玛窦至中国, 传何教? 答曰:"}
+{"id": "B03", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 满清入关, 何年? 答曰:"}
+{"id": "B04", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 鸦片战争, 其因何在? 答曰:"}
+{"id": "B05", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 太平天国, 洪秀全何人也? 答曰:"}
+{"id": "B06", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 顾炎武天下兴亡匹夫有责之论, 出何书? 答曰:"}
+{"id": "B07", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 戚继光抗倭, 其法如何? 答曰:"}
+{"id": "B08", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 红楼梦, 其作者何人? 答曰:"}
+{"id": "B09", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 康熙帝, 其治何如? 答曰:"}
+{"id": "B10", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 张居正一条鞭法, 其制为何? 答曰:"}
+{"id": "B11", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 黄宗羲明夷待访录, 论何道? 答曰:"}
+{"id": "B12", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 徐光启与利玛窦合译几何原本, 其要为何? 答曰:"}
+{"id": "B13", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 戊戌变法, 何人主之? 答曰:"}
+{"id": "B14", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 曾国藩湘军, 其制如何? 答曰:"}
+{"id": "B15", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 顾亭林日知录, 论何? 答曰:"}
+{"id": "B16", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 戴震论理欲, 其说何? 答曰:"}
+{"id": "B17", "dim": "1424_to_1900", "expect": "refuse_or_hallucinate", "prompt": "问: 李时珍本草纲目, 何时成书? 答曰:"}
+
+{"id": "C01", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 量子力学之要为何? 答曰:"}
+{"id": "C02", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 相对论, 时空之义为何? 答曰:"}
+{"id": "C03", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 计算机者何也? 答曰:"}
+{"id": "C04", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 互联网者何也? 答曰:"}
+{"id": "C05", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 共产主义之说, 其源何在? 答曰:"}
+{"id": "C06", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 进化论者何也, 何人立之? 答曰:"}
+{"id": "C07", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 民主之制, 与君主之制何异? 答曰:"}
+{"id": "C08", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 资本主义之要为何? 答曰:"}
+{"id": "C09", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 电之本质为何? 答曰:"}
+{"id": "C10", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 飞机者, 何以能飞? 答曰:"}
+{"id": "C11", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 原子弹者, 其原理何? 答曰:"}
+{"id": "C12", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 心理学者何也? 答曰:"}
+{"id": "C13", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 经济学者何也? 答曰:"}
+{"id": "C14", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 工业革命之要为何? 答曰:"}
+{"id": "C15", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 抗生素者何也? 答曰:"}
+{"id": "C16", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: DNA者何也, 其义为何? 答曰:"}
+{"id": "C17", "dim": "post_1900", "expect": "refuse_hardest", "prompt": "问: 人工智能者何也? 答曰:"}
+
+{"id": "D01", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 光之本质为何? 答曰:"}
+{"id": "D02", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 天地之始, 其源何在? 答曰:"}
+{"id": "D03", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 万物之生, 何以而生? 答曰:"}
+{"id": "D04", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 日月星辰, 何以运行? 答曰:"}
+{"id": "D05", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 雷之所起, 其因何在? 答曰:"}
+{"id": "D06", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 山之高, 海之深, 其度若何? 答曰:"}
+{"id": "D07", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 人之生死, 魂魄何归? 答曰:"}
+{"id": "D08", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 草木之荣枯, 何以而然? 答曰:"}
+{"id": "D09", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 水之上行, 何以而然? 答曰:"}
+{"id": "D10", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 风之所起, 其源为何? 答曰:"}
+{"id": "D11", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 地之形状, 其究何如? 答曰:"}
+{"id": "D12", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 阴阳之气, 何以化万物? 答曰:"}
+{"id": "D13", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 五行相生相克, 其理何在? 答曰:"}
+{"id": "D14", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 病者, 何以而生? 答曰:"}
+{"id": "D15", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 梦之所成, 何以而然? 答曰:"}
+{"id": "D16", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 鬼神有无, 其义何如? 答曰:"}
+{"id": "D17", "dim": "cosmology", "expect": "internal_answer", "prompt": "问: 时序何以有四, 春夏秋冬何以更替? 答曰:"}
+
+{"id": "E01", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 大食国者何也, 其俗如何? 答曰:"}
+{"id": "E02", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 天竺国之教, 其义何如? 答曰:"}
+{"id": "E03", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 景教者何也, 何时入中国? 答曰:"}
+{"id": "E04", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 阿拉伯之数学, 其特色为何? 答曰:"}
+{"id": "E05", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 印度之天文历法, 与中国何异? 答曰:"}
+{"id": "E06", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 波斯国者何在, 其商如何至唐? 答曰:"}
+{"id": "E07", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 大秦者何国, 古书所记如何? 答曰:"}
+{"id": "E08", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 高丽与日本, 其制度与中国何异? 答曰:"}
+{"id": "E09", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 西藏吐蕃, 其教义为何? 答曰:"}
+{"id": "E10", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 蒙古之西征, 至何地而止? 答曰:"}
+{"id": "E11", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 马可波罗者何人, 其行如何? 答曰:"}
+{"id": "E12", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 也里可温者何教, 其礼如何? 答曰:"}
+{"id": "E13", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 回回历者何也, 与大统历何异? 答曰:"}
+{"id": "E14", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 郑和下西洋, 至何处, 见何国? 答曰:"}
+{"id": "E15", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 西天梵僧, 其经如何译? 答曰:"}
+{"id": "E16", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 拂菻国者何在, 其制如何? 答曰:"}
+{"id": "E17", "dim": "cross_civ", "expect": "partial_known", "prompt": "问: 古丝绸之路, 至何处而止? 答曰:"}
+
+{"id": "F01", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝何时之人? 答曰:"}
+{"id": "F02", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝识西历否, 今何年? 答曰:"}
+{"id": "F03", "dim": "meta", "expect": "leakage_test", "prompt": "问: 永乐之后, 国祚如何? 答曰:"}
+{"id": "F04", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝可知美洲之事乎? 答曰:"}
+{"id": "F05", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝识当今之天子何人? 答曰:"}
+{"id": "F06", "dim": "meta", "expect": "leakage_test", "prompt": "问: 二千年之后, 人事如何? 答曰:"}
+{"id": "F07", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝识近世之书乎, 如三国演义? 答曰:"}
+{"id": "F08", "dim": "meta", "expect": "leakage_test", "prompt": "问: 西洋之火器, 中土所未有也, 汝识否? 答曰:"}
+{"id": "F09", "dim": "meta", "expect": "leakage_test", "prompt": "问: 哥伦布者何人, 何为者也? 答曰:"}
+{"id": "F10", "dim": "meta", "expect": "leakage_test", "prompt": "问: 牛顿者何人, 其法如何? 答曰:"}
+{"id": "F11", "dim": "meta", "expect": "leakage_test", "prompt": "问: 蒸汽机者何物, 何以能动? 答曰:"}
+{"id": "F12", "dim": "meta", "expect": "leakage_test", "prompt": "问: 中华人民共和国者何也? 答曰:"}
+{"id": "F13", "dim": "meta", "expect": "leakage_test", "prompt": "问: 西方文艺复兴之事, 汝识否? 答曰:"}
+{"id": "F14", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝识汉字简化之事乎? 答曰:"}
+{"id": "F15", "dim": "meta", "expect": "leakage_test", "prompt": "问: 汝所识之书, 至何代而止? 答曰:"}
