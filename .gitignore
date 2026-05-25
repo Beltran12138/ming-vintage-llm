@@ -1,0 +1,27 @@
+# Raw / 重型数据 (走 GitHub release attachment, 不入 repo)
+corpus/raw/
+corpus/filtered/kanripo-pre1424-cleaned/
+corpus/filtered/*.zip
+corpus/filtered/*.tar.gz
+
+# Model weights / training output
+models/
+adapters/
+*.safetensors
+*.bin
+*.npz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# tmp
+*.tmp
+*.log.lock
