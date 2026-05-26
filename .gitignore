@@ -25,3 +25,7 @@ Thumbs.db
 # tmp
 *.tmp
 *.log.lock
+
+# Phase 1 之 progress logs
+corpus/stats/*-progress.log
+corpus/stats/cleanup-fails.log
