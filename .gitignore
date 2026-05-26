@@ -29,3 +29,7 @@ Thumbs.db
 # Phase 1 之 progress logs
 corpus/stats/*-progress.log
 corpus/stats/cleanup-fails.log
+
+# Downloaded HF caches (re-fetchable, large)
+mlx_to_peft/raw/
+mlx_to_peft/mlx_backup/

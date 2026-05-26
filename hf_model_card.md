@@ -4,11 +4,11 @@ library_name: peft
 base_model: Qwen/Qwen2.5-3B-Instruct
 tags:
   - classical-chinese
-  - 文言
+  - wenyan
   - vintage-llm
   - lora
   - historical-nlp
-  - 1424
+  - "1424"
   - ming-dynasty
 language:
   - zh

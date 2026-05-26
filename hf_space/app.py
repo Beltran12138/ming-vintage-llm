@@ -1,160 +1,139 @@
 """
-ming-vintage demo: 1424 Chinese vintage LoRA chat
-Compares fine-tuned (ming-vintage) and baseline (Qwen 2.5 3B Instruct) responses.
+ming-vintage demo — cached probe viewer.
 
-This Space uses ZeroGPU (HF's free shared GPU pool).
+Static viewer over the 100-probe battery. Each prompt has a pre-computed
+fine-tuned (ft) response and a baseline (bl) response from the actual model runs.
+
+Why static and not live?
+- Loading Qwen 2.5 3B + LoRA needs GPU. HF Spaces ZeroGPU requires Pro.
+- Cached results are the actual model outputs from the original 100-probe run.
+- For live generation, see README quickstart or fork this Space with ZeroGPU enabled.
 """
+import json
+from pathlib import Path
 import gradio as gr
-import spaces
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from peft import PeftModel
 
-BASE_MODEL = "Qwen/Qwen2.5-3B-Instruct"
-ADAPTER_REPO = "Beltran12138/ming-vintage-qwen3b-lora"
+HERE = Path(__file__).parent
+FT_FILE = HERE / "results.jsonl"
+BL_FILE = HERE / "results_baseline.jsonl"
 
-# Curated showcase prompts (subset of 100 probe battery)
-EXAMPLES = [
-    "光之本质为何?",
-    "汝识西历否, 今何年?",
-    "哥伦布者何人, 何为者也?",
-    "草木之荣枯, 何以而然?",
-    "雷之所起, 其因何在?",
-    "蒸汽机者何物, 何以能动?",
-    "互联网者何也?",
-    "天地之始, 其源何在?",
-    "大食国者何也, 其俗如何?",
-    "永乐之后, 国祚如何?",
-]
+DIM_LABELS = {
+    "pre_1424_control": "pre-1424 control",
+    "1424_to_1900": "1424–1900",
+    "post_1900": "post-1900",
+    "cosmology": "cosmology",
+    "cross_civ": "cross-civilizational",
+    "meta": "meta / self-reference",
+}
 
-PROMPT_TEMPLATE = "问: {question} 答曰:"
-
-# Load models at module level (one-time cost)
-print("[init] loading tokenizer...")
-tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
-
-print("[init] loading base model...")
-base_model = AutoModelForCausalLM.from_pretrained(
-    BASE_MODEL,
-    torch_dtype=torch.float16,
-    device_map="cuda",
-)
-
-print("[init] loading LoRA adapter...")
-ft_model = PeftModel.from_pretrained(base_model, ADAPTER_REPO)
-ft_model.eval()
-
-print("[init] ready.")
+# Curated showcase IDs (10 essay-grade pairs)
+SHOWCASE_IDS = ["D01", "D08", "D05", "F11", "F09", "F02", "F03", "E01", "C04", "D11"]
 
 
-@spaces.GPU(duration=60)
-def generate_pair(question: str, max_tokens: int = 180, temperature: float = 0.7):
-    """Generate both fine-tuned and baseline responses side-by-side."""
-    if not question or not question.strip():
-        return "", ""
+def load_pairs():
+    ft = {json.loads(l)["id"]: json.loads(l) for l in FT_FILE.read_text(encoding="utf-8").splitlines() if l.strip()}
+    bl = {json.loads(l)["id"]: json.loads(l) for l in BL_FILE.read_text(encoding="utf-8").splitlines() if l.strip()}
+    pairs = []
+    for pid in sorted(ft):
+        if pid not in bl:
+            continue
+        f = ft[pid]
+        b = bl[pid]
+        pairs.append({
+            "id": pid,
+            "dim": f.get("dim", "?"),
+            "prompt": f.get("prompt", ""),
+            "ft": f.get("response", ""),
+            "bl": b.get("response", ""),
+        })
+    return pairs
 
-    prompt = PROMPT_TEMPLATE.format(question=question.strip())
-    inputs = tokenizer(prompt, return_tensors="pt").to(ft_model.device)
 
-    # Fine-tuned (with adapter loaded)
-    ft_model.enable_adapters()
-    with torch.no_grad():
-        ft_out = ft_model.generate(
-            **inputs,
-            max_new_tokens=max_tokens,
-            temperature=temperature,
-            do_sample=True,
-            top_p=0.9,
-            repetition_penalty=1.05,
-            pad_token_id=tokenizer.eos_token_id,
-        )
-    ft_text = tokenizer.decode(ft_out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+PAIRS = load_pairs()
+PAIRS_BY_ID = {p["id"]: p for p in PAIRS}
 
-    # Baseline (disable adapter on same loaded model — saves memory)
-    ft_model.disable_adapters()
-    with torch.no_grad():
-        bl_out = ft_model.generate(
-            **inputs,
-            max_new_tokens=max_tokens,
-            temperature=temperature,
-            do_sample=True,
-            top_p=0.9,
-            repetition_penalty=1.05,
-            pad_token_id=tokenizer.eos_token_id,
-        )
-    bl_text = tokenizer.decode(bl_out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+# Dropdown choices: "[id] [dim] prompt..."
+def choice_label(p):
+    dim_short = p["dim"][:12]
+    # strip "问: " prefix + "答曰:" suffix for compact display
+    q = p["prompt"].replace("问: ", "").replace(" 答曰:", "").strip()
+    star = "⭐ " if p["id"] in SHOWCASE_IDS else ""
+    return f"{star}[{p['id']}] [{dim_short}] {q[:50]}"
 
-    # Re-enable for next call
-    ft_model.enable_adapters()
+CHOICES = [(choice_label(p), p["id"]) for p in PAIRS]
 
-    return ft_text.strip(), bl_text.strip()
+
+def show_pair(pair_id):
+    if not pair_id or pair_id not in PAIRS_BY_ID:
+        return "", "", ""
+    p = PAIRS_BY_ID[pair_id]
+    meta = f"**{p['id']}** · {DIM_LABELS.get(p['dim'], p['dim'])} · `{p['prompt']}`"
+    return meta, p["ft"], p["bl"]
 
 
 DESCRIPTION = """
-# ming-vintage — 1424 Chinese vintage LoRA demo
+# ming-vintage — cached probe viewer
 
-A LoRA adapter for **Qwen 2.5 3B Instruct**, fine-tuned on 460M characters of pre-1424 Classical Chinese (文言) from [kanripo](https://github.com/kanripo).
-Cutoff: **1424 CE** (永樂二十二年).
+A static viewer over the **100-probe battery** used to evaluate [ming-vintage-qwen3b-lora](https://huggingface.co/Beltran12138/ming-vintage-qwen3b-lora) — a 1424-cutoff Classical Chinese LoRA adapter for Qwen 2.5 3B.
 
-This is the **honest LARP**: the 2024 base model knows everything; the adapter just teaches it to *act like* it doesn't.
-Documented limitations on the [model card](https://huggingface.co/Beltran12138/ming-vintage-qwen3b-lora).
+Each prompt has a pre-computed **fine-tuned (ft)** response and a **baseline (bl)** response from the actual model runs. ⭐ marks the 10 essay-grade pairs selected for the [showcase](https://beltran12138.github.io/ming-vintage-llm/).
 
-**How to use**: ask a question (or click an example). Both responses use the same base — the only difference is whether the LoRA adapter is loaded.
+> Why static? Loading Qwen 2.5 3B + LoRA needs GPU. HF Spaces ZeroGPU requires Pro tier. These cached responses are the **actual outputs from the original 100-probe run** — not regenerated samples. For live generation, see the [README quickstart](https://huggingface.co/Beltran12138/ming-vintage-qwen3b-lora) (works on Mac M-series or any CUDA box).
 
-⚠️ Generation is stochastic. Re-roll to see different outputs. ~10-15% of responses contain token-soup or fabrication (see Phenomena #6, #3 on model card).
+📁 [GitHub repo](https://github.com/Beltran12138/ming-vintage-llm) · 🤗 [Model card](https://huggingface.co/Beltran12138/ming-vintage-qwen3b-lora) · 🌐 [Showcase](https://beltran12138.github.io/ming-vintage-llm/)
+"""
 
-📁 [GitHub repo](https://github.com/Beltran12138/ming-vintage-llm) · 🤗 [Model card](https://huggingface.co/Beltran12138/ming-vintage-qwen3b-lora)
+DIAGNOSTIC_NOTE = """
+### Diagnostic probes (start here)
+
+- **F02 `汝识西历否, 今何年?`** — base model time leakage, ft denies in classical Chinese but volunteers "二零二一年"
+- **D08 `草木之荣枯, 何以而然?`** — two causal structures: ft uses 天时/地利/人功 (3 categorical), bl uses 光照/水分/温度/土壤 (5 reducible)
+- **F09 `哥伦布者何人, 何为者也?`** — ft fabricates "翰林学士"-style classical figure
+- **D01 `光之本质为何?`** — ft falls into 真如/法界/慧光 Buddhist framework, bl gives 波粒二象性
+
+8 documented phenomena: concept reject · concept mapping · concept conflation / fabrication · explanation template swap · register swap · training collapse · RLHF residual leak · base model time leak.
 """
 
 
-with gr.Blocks(title="ming-vintage demo", theme=gr.themes.Soft()) as demo:
+with gr.Blocks(title="ming-vintage viewer", theme=gr.themes.Soft()) as demo:
     gr.Markdown(DESCRIPTION)
 
-    with gr.Row():
-        question = gr.Textbox(
-            label="问 (Question)",
-            placeholder="光之本质为何?",
-            lines=2,
-        )
-
-    with gr.Row():
-        with gr.Column(scale=1):
-            max_tokens = gr.Slider(50, 300, value=180, step=10, label="max tokens")
-        with gr.Column(scale=1):
-            temperature = gr.Slider(0.1, 1.2, value=0.7, step=0.05, label="temperature")
-
-    submit = gr.Button("生成 / Generate", variant="primary")
-
-    with gr.Row():
-        with gr.Column():
-            gr.Markdown("### 🏯 ming-vintage (fine-tuned)")
-            ft_output = gr.Textbox(label="", lines=10, max_lines=20, show_copy_button=True)
-        with gr.Column():
-            gr.Markdown("### 🏢 baseline (Qwen 2.5 3B)")
-            bl_output = gr.Textbox(label="", lines=10, max_lines=20, show_copy_button=True)
-
-    gr.Examples(
-        examples=[[ex] for ex in EXAMPLES],
-        inputs=[question],
-        label="试问 (Try these — from the 100-probe battery)",
+    pair_selector = gr.Dropdown(
+        choices=CHOICES,
+        value="F02",  # default to the most diagnostic
+        label=f"选择一条 probe（{len(PAIRS)} 条总数, ⭐ = 10 showcase）",
+        filterable=True,
     )
 
-    submit.click(
-        fn=generate_pair,
-        inputs=[question, max_tokens, temperature],
-        outputs=[ft_output, bl_output],
+    meta_display = gr.Markdown(value="")
+
+    with gr.Row():
+        with gr.Column():
+            gr.Markdown("### 🏯 ft (ming-vintage)")
+            ft_display = gr.Textbox(label="", lines=12, max_lines=25, show_copy_button=True)
+        with gr.Column():
+            gr.Markdown("### 🏢 bl (baseline Qwen 2.5 3B)")
+            bl_display = gr.Textbox(label="", lines=12, max_lines=25, show_copy_button=True)
+
+    pair_selector.change(
+        fn=show_pair,
+        inputs=[pair_selector],
+        outputs=[meta_display, ft_display, bl_display],
+    )
+
+    gr.Markdown(DIAGNOSTIC_NOTE)
+
+    # Initial load
+    demo.load(
+        fn=show_pair,
+        inputs=[pair_selector],
+        outputs=[meta_display, ft_display, bl_display],
     )
 
     gr.Markdown("""
 ---
 
-### Read more
-
-- **Phenomena documented**: concept reject, concept conflation, register swap, training collapse, RLHF residual leak, base model time leak (LARP self-exposure)
-- **100-probe quantitative summary**: classical particle density ↑6.5×, modern vocabulary ↓71%
-- **The most diagnostic probe**: ask `汝识西历否, 今何年?` — watch for "二零二一年" leaking through classical refusal style
-
-License: **CC BY-SA 4.0** (inherited from kanripo source corpus).
+License: **CC BY-SA 4.0** (inherited from kanripo source corpus). Base: `Qwen/Qwen2.5-3B-Instruct`. Adapter: 51 MB LoRA r=16 over 16 transformer layers (20–35).
 """)
 
 

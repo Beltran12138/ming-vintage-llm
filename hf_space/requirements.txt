@@ -1,6 +1,2 @@
-torch
-transformers>=4.45.0
-peft>=0.13.0
-accelerate
-spaces
-gradio>=4.44.0
+gradio>=5.10.0
+audioop-lts; python_version >= "3.13"

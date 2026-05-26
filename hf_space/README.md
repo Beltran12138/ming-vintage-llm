@@ -1,20 +1,19 @@
 ---
-title: ming-vintage demo
+title: ming-vintage viewer
 emoji: 🏯
 colorFrom: yellow
 colorTo: red
 sdk: gradio
-sdk_version: 4.44.0
+sdk_version: 5.10.0
 app_file: app.py
 pinned: false
 license: cc-by-sa-4.0
-short_description: 1424 Chinese vintage LoRA (Qwen 2.5 3B) — the honest LARP
+short_description: 100-probe viewer for 1424 Chinese vintage LoRA
 models:
   - Beltran12138/ming-vintage-qwen3b-lora
-  - Qwen/Qwen2.5-3B-Instruct
 tags:
   - classical-chinese
-  - 文言
+  - wenyan
   - vintage-llm
   - lora
   - historical-nlp
