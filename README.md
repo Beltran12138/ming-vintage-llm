@@ -162,6 +162,8 @@ ming-vintage/
 5. **3B is small**. Original target was 7B; reasoning depth is limited.
 6. **No safety fine-tuning** beyond what base Qwen provides.
 
+7. **Multilingual backdoor (July 2026 finding).** The base model's 152K-token vocabulary includes low-frequency tokens from 100+ languages that the LoRA adapter (r=16, ~51 MB) does not learn to suppress. A 6-seed qualitative comparison detected leaked Turkish dotted İ, Arabic script, Korean Hangul, and C# identifiers in LoRA output — tokens absent from the 31K-char Classical Chinese vocabulary of the from-scratch companion model. This is a structural limitation of adapter-based vintage models: vocabulary-level leakage is unsolvable at LoRA-scale capacity.
+
 Full discussion in [hf_model_card.md](hf_model_card.md#limitations).
 
 ## Citation
